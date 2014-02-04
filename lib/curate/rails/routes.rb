@@ -12,7 +12,13 @@ module ActionDispatch::Routing
             put :remove_member
           end
         end
-        resources 'organizations'
+        resources 'organizations' do
+          collection do
+            get :add_member_form
+            put :add_member
+            put :remove_member
+          end
+        end
         resources 'people', only: [:show, :index] do
           resources :depositors, only: [:index, :create, :destroy]
         end

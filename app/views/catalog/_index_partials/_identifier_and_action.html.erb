@@ -36,10 +36,8 @@
       <% end %>
       <% end %>
 
-      <% unless document.respond_to?(:user) %>
-        <% if can? :collect, document %>
-          <%= render 'add_to_collection_gui', collectible: document %>
-        <% end %>
+      <% if can? :collect, document %>
+        <%= render 'add_to_collection_gui', collectible: document %>
       <% end %>
     <% end %>
   </div>

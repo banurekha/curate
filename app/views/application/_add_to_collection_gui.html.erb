@@ -6,14 +6,25 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 id="<% modal_title_id %>class="modal-title">Add <%= "#{collectible}" %> to one of your collections:</h4>
+        <% if collectible.respond_to?(:user) %>
+          <h4 id="<% modal_title_id %>class="modal-title">Add <%= "#{collectible}" %> to one of your organizations:</h4>
+        <% else %>
+          <h4 id="<% modal_title_id %>class="modal-title">Add <%= "#{collectible}" %> to one of your collections:</h4>
+        <% end %>
       </div>
       <div class="unpadded modal-body">
-        <%= render partial: 'curate/collections/form_to_add_member', locals: { collectible: collectible, fieldset_class: 'with-side-padding with-top-padding', select_label_id: modal_title_id } %>
+        <% if collectible.respond_to?(:user) %>
+          <%= render partial: 'curate/organizations/form_to_add_member', locals: { collectible: collectible, fieldset_class: 'with-side-padding with-top-padding', select_label_id: modal_title_id } %>
+        <% else %>
+          <%= render partial: 'curate/collections/form_to_add_member', locals: { collectible: collectible, fieldset_class: 'with-side-padding with-top-padding', select_label_id: modal_title_id } %>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 
-<%= link_to 'Add to Collection', add_member_form_collections_path(collectible_id: collectible.pid), data: { toggle: "modal", target: ('#' + modal_id) }, method: :get, class: "add-to-collection #{button_class}", remote: true %>
-
+<% if collectible.respond_to?(:user) %>
+  <%= link_to 'Add to Organizaton', add_member_form_organizations_path(collectible_id: collectible.pid), data: { toggle: "modal", target: ('#' + modal_id) }, method: :get, class: "add-to-collection #{button_class}", remote: true %>
+<% else %>
+  <%= link_to 'Add to Collection', add_member_form_collections_path(collectible_id: collectible.pid), data: { toggle: "modal", target: ('#' + modal_id) }, method: :get, class: "add-to-collection #{button_class}", remote: true %>
+<% end %>

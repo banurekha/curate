@@ -2,3 +2,7 @@
   <h1><%= @organization %> <span class="human_readable_type">(<%= @organization.human_readable_type %>)</span></h1>
 <% end %>
 <%= render 'form' %>
+<h2>Organization Members</h2>
+<div id="documents" class="clear">
+  <%= list_people_in_organization(@organization) %>
+</div>

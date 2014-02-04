@@ -24,4 +24,8 @@
 <div class="organization-description">
   <%= @organization.description %>
 </div>
+<h2>Organization Members</h2>
+<div id="documents" class="clear">
+  <%= list_people_in_organization(@organization) %>
+</div>
 
