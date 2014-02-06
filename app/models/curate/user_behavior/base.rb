@@ -3,6 +3,10 @@ module Curate
     module Base
       extend ActiveSupport::Concern
 
+      included do
+        has_many :hydramata_group_members, class_name: "Hydramata::GroupMember"
+        has_many :hydramata_groups, through: :hydramata_group_members
+      end
       def repository_noid
         Sufia::Noid.noidify(repository_id)
       end
