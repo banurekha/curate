@@ -4,8 +4,8 @@ module Curate
       extend ActiveSupport::Concern
 
       included do
-        has_many :hydramata_group_members, class_name: "Hydramata::GroupMember"
-        has_many :hydramata_groups, through: :hydramata_group_members
+        has_many :hydramata_group_members, class_name: "Hydramata::GroupMember", foreign_key: "user_id"
+        has_many :hydramata_groups, through: :hydramata_group_members, foreign_key: "hydramata_group_id"
       end
       def repository_noid
         Sufia::Noid.noidify(repository_id)
