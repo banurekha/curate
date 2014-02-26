@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'browse_everything' %>
 <% unless curation_concern.persisted? %>
   <fieldset id="work-contents">
     <div class="row with-headroom">
@@ -24,7 +25,7 @@
         <%= f.input :linked_resource_urls, label: "External link", input_html: {class: 'input-xlarge'} %>
       </fieldset>
 
-      <fieldset class="span6">
+       <fieldset class="span6">
         <p>Please click the button below to upload remote files.</p>
         <%= form_tag('/file', id: 'main_form', method: 'post') do %>
             <%= button_tag("Browse", type: 'button', class: 'btn btn-large btn-success', id: "browse-btn",
@@ -32,16 +33,13 @@
                            'data-target' => '#main_form' ) %>
             <%= button_tag("Submit", type: 'submit', class: 'btn btn-large btn-primary', id: "submit-btn") %>
         <% end %>
-        <p id="status">0 items selected</p>
-        <script>
-            $(document).ready(function() {
-                $('#browse-btn').browseEverything(browse_everything_engine.root_path)
-                        .done(function(data) { $('#status').html(data.length.toString() + " items selected") })
-                        .cancel(function() { window.alert('Canceled!') });
-            });
-        </script>
-      </fieldset>
 
+        <p id="status">0 items selected</p>
+      </fieldset>
     </div>
   </fieldset>
 <% end %>
+
+
+
+
